@@ -306,7 +306,7 @@ function App() {
           {messages.length === 0 && (
             <div className="welcome-message">
               <h2>Welcome to Mamba's SEO AI Agent!</h2>
-              <p>Ask me anything about SEO - I have full access to DataForSEO and can search the web!</p>
+              <p>Ask me anything about SEO - I have full access to DataForSEO!</p>
               <div className="examples">
                 <h3>Try asking:</h3>
                 <div className="example-buttons">
@@ -334,7 +334,7 @@ function App() {
 
                   <button 
                     className="example-button" 
-                    onClick={() => setInput("Analze my websie and find my top perorming pagse. url: ")}
+                    onClick={() => setInput("Analze my website and find my top perorming pagse. url: ")}
                   >
                     <span className="example-icon">📈</span>
                     Analze my websie and find my top perorming pagse. url: 
