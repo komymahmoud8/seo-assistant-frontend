@@ -30,7 +30,7 @@ git push -u origin main
    - **Value:** `https://seo-mcp-lessgoooo-production.up.railway.app`
 4. Railway will automatically redeploy with the new variable
 
-**Note:** The build is configured with `CI=false` to handle warnings and includes proper nixpacks configuration for Railway.
+**Note:** The build is configured with `CI=false` to handle warnings and includes `.npmrc` to prevent npm cache issues in Railway.
 
 ## ✅ That's It!
 

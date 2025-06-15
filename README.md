@@ -116,9 +116,10 @@ The frontend connects to your SEO Assistant backend via the `REACT_APP_BACKEND_U
 
 ### Railway Build Fails
 - ✅ Build script includes `CI=false` to handle warnings
-- ✅ `nixpacks.toml` is configured for Railway deployment
+- ✅ `.npmrc` configured to prevent npm cache issues
+- ✅ Simplified Railway configuration (no custom nixpacks)
+- ✅ Fresh `package-lock.json` for Railway compatibility
 - ✅ Check Railway logs for specific error messages
-- ✅ Ensure all dependencies are in `package.json`
 
 ### Frontend won't connect to backend
 - ✅ Check `REACT_APP_BACKEND_URL` is set correctly in Railway Variables
