@@ -319,7 +319,7 @@ function App() {
                   </button>
                   <button 
                     className="example-button" 
-                    onClick={() => setInput("Do a full on-page SEO audit for utiladivecenter.com")}
+                    onClick={() => setInput("Do a full technical SEO audit for utiladivecenter.com")}
                   >
                     <span className="example-icon">🔗</span>
                     Do a full on-page SEO audit for utiladivecenter.com
@@ -334,15 +334,15 @@ function App() {
 
                   <button 
                     className="example-button" 
-                    onClick={() => setInput("Analze my website and find my top perorming pagse. url: ")}
+                    onClick={() => setInput("Analyze this website and find the top non-branded keywords and my rankings: mamba.agency")}
                   >
                     <span className="example-icon">📈</span>
-                    Analze my websie and find my top perorming pagse. url: 
+                    Analyze this website and find the top performing pages. url: 
                   </button>
 
                   <button 
                     className="example-button" 
-                    onClick={() => setInput("Based on my website performance, find the top 3 pages to improve. url: ")}
+                    onClick={() => setInput("Based on my website performance, find the top 3 pages to improve: gulflandproperty.com")}
                   >
                     <span className="example-icon">🎯</span>
                     Based on my website performance, find the top 3 pages to improve. url: 
@@ -350,15 +350,15 @@ function App() {
 
                   <button 
                     className="example-button" 
-                    onClick={() => setInput("Find my top 3 competitors, their strategy and what I shoudl do. My url: ")}
+                    onClick={() => setInput("Find my top 3 competitors, their strategy and what I should do: utiladivecenter.com")}
                   >
                     <span className="example-icon">🏆</span>
-                    Find my top 3 competitors, their strategy and what I shoudl do. My url: 
+                    Find my top 3 competitors, their strategy and what I should do. My url: 
                   </button>
 
                   <button 
                     className="example-button" 
-                    onClick={() => setInput("Do a full Content Analysis for my website: ")}
+                    onClick={() => setInput("Do a full Content Analysis for my website: gulflandproperty.com")}
                   >
                     <span className="example-icon">📝</span>
                     Do a full Content Analysis for my website: 
