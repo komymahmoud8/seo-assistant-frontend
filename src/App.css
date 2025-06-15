@@ -75,10 +75,12 @@ body {
 .messages {
   flex: 1;
   overflow-y: auto;
-  padding: 2rem 0;
+  padding: 1.5rem 0 2rem 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
+  scroll-behavior: smooth;
+  scroll-padding-bottom: 1rem;
 }
 
 .welcome-message {
@@ -104,34 +106,64 @@ body {
 
 .examples {
   text-align: left;
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
 .examples h3 {
   color: #333;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-size: 1.2rem;
+  text-align: center;
 }
 
-.examples ul {
-  list-style: none;
+.example-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  justify-items: center;
 }
 
-.examples li {
-  background: #f8f9fa;
-  padding: 0.8rem 1rem;
-  margin: 0.5rem 0;
-  border-radius: 8px;
-  border-left: 4px solid #667eea;
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+.example-button {
+  width: 100%;
+  max-width: 320px;
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
   font-size: 0.9rem;
-  color: #555;
+  color: #444;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.example-button:hover {
+  border-color: #667eea;
+  background: #f8f9ff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.example-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.example-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
 }
 
 .message {
   display: flex;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
 }
 
 .message.user {
@@ -143,10 +175,13 @@ body {
 }
 
 .message-content {
-  max-width: 80%;
-  padding: 1rem 1.5rem;
-  border-radius: 18px;
+  max-width: 75%;
+  padding: 1.2rem 1.5rem;
+  border-radius: 16px;
   position: relative;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.2s ease-out;
+  will-change: auto;
 }
 
 .message.user .message-content {
@@ -155,32 +190,55 @@ body {
   border-bottom-right-radius: 4px;
 }
 
+.message.user .message-text {
+  white-space: pre-wrap;
+}
+
 .message.assistant .message-content {
-  background: #f0f0f0;
+  background: #ffffff;
   color: #333;
   border-bottom-left-radius: 4px;
+  border: 1px solid #e0e0e0;
 }
 
 .message.assistant.streaming .message-content {
-  min-height: 2rem;
+  min-height: 3rem;
+  position: relative;
+}
+
+.message.assistant.streaming .message-content::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #667eea, transparent);
+  animation: streaming-gradient 2s infinite;
+}
+
+@keyframes streaming-gradient {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .message-text {
-  line-height: 1.4;
-  white-space: pre-wrap;
+  line-height: 1.6;
   word-wrap: break-word;
+  font-size: 1rem;
 }
 
 .message-time {
-  font-size: 0.75rem;
-  opacity: 0.7;
-  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  opacity: 0.5;
+  margin-top: 0.8rem;
+  font-weight: 400;
 }
 
 .typing-indicator {
-  margin-top: 0.5rem;
-  color: #667eea;
-  font-weight: bold;
+  margin-top: 0.8rem;
+  color: #999;
+  font-size: 0.8rem;
   animation: pulse 1.5s infinite;
 }
 
@@ -192,10 +250,10 @@ body {
 .input-container {
   display: flex;
   gap: 1rem;
-  padding: 1.5rem 0;
-  background: white;
-  border-top: 1px solid #e0e0e0;
-  align-items: flex-end;
+  padding: 1.5rem;
+  align-items: stretch;
+  position: sticky;
+  bottom: 0;
 }
 
 .input-container textarea {
@@ -208,6 +266,8 @@ body {
   resize: none;
   outline: none;
   transition: border-color 0.2s ease;
+  min-height: 60px;
+  max-height: 120px;
 }
 
 .input-container textarea:focus {
@@ -291,6 +351,21 @@ body {
   .input-container {
     padding: 1rem 0;
   }
+
+  .example-buttons {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .example-button {
+    max-width: 100%;
+    padding: 0.9rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .example-icon {
+    font-size: 1.1rem;
+  }
 }
 
 .clear-button {
@@ -310,37 +385,84 @@ body {
   transform: translateY(-1px);
 }
 
-/* Minimal markdown spacing - match user text */
-.message.assistant .message-text * {
-  margin: 0;
-  line-height: 1.4;
+/* Clean markdown styling for assistant messages */
+.message.assistant .message-text {
+  color: #333;
 }
 
 .message.assistant .message-text p {
-  margin: 0;
+  margin: 0 0 0.8rem 0;
+}
+
+.message.assistant .message-text p:last-child {
+  margin-bottom: 0;
 }
 
 .message.assistant .message-text h1,
 .message.assistant .message-text h2,
-.message.assistant .message-text h3 {
-  margin: 0;
-  font-size: inherit;
+.message.assistant .message-text h3,
+.message.assistant .message-text h4,
+.message.assistant .message-text h5,
+.message.assistant .message-text h6 {
+  margin: 1rem 0 0.5rem 0;
   font-weight: 600;
+  color: #222;
+}
+
+.message.assistant .message-text h1:first-child,
+.message.assistant .message-text h2:first-child,
+.message.assistant .message-text h3:first-child {
+  margin-top: 0;
 }
 
 .message.assistant .message-text ul,
 .message.assistant .message-text ol {
-  margin: 0;
-  padding-left: 1.2rem;
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
 }
 
 .message.assistant .message-text li {
-  margin: 0;
-  padding-left: 0.3rem;
+  margin: 0.2rem 0;
+  line-height: 1.5;
 }
 
-.message.assistant .message-text br {
-  line-height: 0.5;
+.message.assistant .message-text code {
+  background: #f4f4f4;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.9em;
+}
+
+.message.assistant .message-text pre {
+  background: #f8f8f8;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0.8rem 0;
+}
+
+.message.assistant .message-text pre code {
+  background: none;
+  padding: 0;
+}
+
+.message.assistant .message-text blockquote {
+  border-left: 4px solid #667eea;
+  padding-left: 1rem;
+  margin: 0.8rem 0;
+  color: #666;
+  font-style: italic;
+}
+
+.message.assistant .message-text strong {
+  font-weight: 600;
+  color: #222;
+}
+
+.message.assistant .message-text em {
+  font-style: italic;
+  color: #444;
 }
 
 /* Login Styles */

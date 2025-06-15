@@ -235,9 +235,9 @@ function App() {
       <div className="App">
         <div className="login-container">
           <div className="login-box">
-            <h1>🔍 SEO Assistant</h1>
+            <h1>🔍 Mamba's SEO AI Agent</h1>
             <h2>🔐 Login Required</h2>
-            <p>Please enter your credentials to access the SEO Assistant</p>
+            <p>Please enter your credentials to access Mamba's SEO AI agent</p>
             
             <form onSubmit={handleLogin} className="login-form">
               <div className="form-group">
@@ -283,7 +283,7 @@ function App() {
   return (
     <div className="App">
       <header className="app-header">
-        <h1>🔍 SEO Assistant</h1>
+        <h1>🔍 Mamba's SEO AI Agent</h1>
         <div className="header-controls">
           <div className="status">
             <span className={`status-indicator ${isConnected ? 'connected' : 'disconnected'}`}>
@@ -305,16 +305,73 @@ function App() {
         <div className="messages">
           {messages.length === 0 && (
             <div className="welcome-message">
-              <h2>Welcome to SEO Assistant!</h2>
-              <p>Ask me anything about SEO analysis, keyword research, backlinks, or web search.</p>
+              <h2>Welcome to Mamba's SEO AI Agent!</h2>
+              <p>Ask me anything about SEO - I have full access to DataForSEO and can search the web!</p>
               <div className="examples">
                 <h3>Try asking:</h3>
-                <ul>
-                  <li>"Get search volume for 'AI agents'"</li>
-                  <li>"Analyze backlinks for example.com"</li>
-                  <li>"Find keyword ideas for coffee shop"</li>
-                  <li>"Search for latest SEO trends"</li>
-                </ul>
+                <div className="example-buttons">
+                  <button 
+                    className="example-button" 
+                    onClick={() => setInput("Get all analysis for the keyword 'Diving in Utila'")}
+                  >
+                    <span className="example-icon">📊</span>
+                    Get all analysis for the keyword 'Diving in Utila'
+                  </button>
+                  <button 
+                    className="example-button" 
+                    onClick={() => setInput("Do a full on-page SEO audit for utiladivecenter.com")}
+                  >
+                    <span className="example-icon">🔗</span>
+                    Do a full on-page SEO audit for utiladivecenter.com
+                  </button>
+                  <button 
+                    className="example-button" 
+                    onClick={() => setInput("Find keyword ideas for Real Estate in Dubai")}
+                  >
+                    <span className="example-icon">💡</span>
+                    Find keyword ideas for Real Estate in Dubai
+                  </button>
+
+                  <button 
+                    className="example-button" 
+                    onClick={() => setInput("Analze my websie and find my top perorming pagse. url: ")}
+                  >
+                    <span className="example-icon">📈</span>
+                    Analze my websie and find my top perorming pagse. url: 
+                  </button>
+
+                  <button 
+                    className="example-button" 
+                    onClick={() => setInput("Based on my website performance, find the top 3 pages to improve. url: ")}
+                  >
+                    <span className="example-icon">🎯</span>
+                    Based on my website performance, find the top 3 pages to improve. url: 
+                  </button>
+
+                  <button 
+                    className="example-button" 
+                    onClick={() => setInput("Find my top 3 competitors, their strategy and what I shoudl do. My url: ")}
+                  >
+                    <span className="example-icon">🏆</span>
+                    Find my top 3 competitors, their strategy and what I shoudl do. My url: 
+                  </button>
+
+                  <button 
+                    className="example-button" 
+                    onClick={() => setInput("Do a full Content Analysis for my website: ")}
+                  >
+                    <span className="example-icon">📝</span>
+                    Do a full Content Analysis for my website: 
+                  </button>
+
+                  <button 
+                    className="example-button" 
+                    onClick={() => setInput("Search for latest SEO trends")}
+                  >
+                    <span className="example-icon">🔍</span>
+                    Search for latest SEO trends
+                  </button>
+                </div>
               </div>
             </div>
           )}
