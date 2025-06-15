@@ -4,14 +4,4 @@ builder = "nixpacks"
 [deploy]
 healthcheckPath = "/"
 healthcheckTimeout = 300
-restartPolicyType = "on_failure"
-
-[[services]]
-name = "seo-assistant-frontend"
-
-[services.source]
-repo = "your-username/seo-assistant-frontend"
-rootDirectory = "/"
-
-[services.variables]
-REACT_APP_BACKEND_URL = "https://seo-mcp-lessgoooo-production.up.railway.app" 
+restartPolicyType = "on_failure" 

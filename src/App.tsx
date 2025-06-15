@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './App.css';
 
@@ -19,12 +19,8 @@ interface StreamEvent {
 
 // Get backend URL from environment or use default
 const getBackendUrl = () => {
-  // In production (Railway), use relative URLs to the backend service
-  if (process.env.NODE_ENV === 'production') {
-    return process.env.REACT_APP_API_URL || '';
-  }
-  // In development, use localhost
-  return 'http://localhost:8000';
+  // Use environment variable if set, otherwise use localhost for development
+  return process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
 };
 
 function App() {
@@ -45,12 +41,7 @@ function App() {
     scrollToBottom();
   }, [messages, currentResponse]);
 
-  useEffect(() => {
-    // Check backend status on load
-    checkBackendStatus();
-  }, []);
-
-  const checkBackendStatus = async () => {
+  const checkBackendStatus = useCallback(async () => {
     try {
       const response = await fetch(`${backendUrl}/status`);
       const data = await response.json();
@@ -58,7 +49,12 @@ function App() {
     } catch (error) {
       setIsConnected(false);
     }
-  };
+  }, [backendUrl]);
+
+  useEffect(() => {
+    // Check backend status on load
+    checkBackendStatus();
+  }, [checkBackendStatus]);
 
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
