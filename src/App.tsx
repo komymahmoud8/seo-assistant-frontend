@@ -29,6 +29,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [currentResponse, setCurrentResponse] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loginUsername, setLoginUsername] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
   const backendUrl = getBackendUrl();
@@ -52,9 +56,54 @@ function App() {
   }, [backendUrl]);
 
   useEffect(() => {
-    // Check backend status on load
-    checkBackendStatus();
+    // Check if user is already authenticated (stored in localStorage)
+    const authStatus = localStorage.getItem('seo-assistant-auth');
+    if (authStatus === 'authenticated') {
+      setIsAuthenticated(true);
+      // Check backend status on load only if authenticated
+      checkBackendStatus();
+    }
   }, [checkBackendStatus]);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginError('');
+
+    try {
+      const response = await fetch(`${backendUrl}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          username: loginUsername, 
+          password: loginPassword 
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setIsAuthenticated(true);
+        localStorage.setItem('seo-assistant-auth', 'authenticated');
+        setLoginUsername('');
+        setLoginPassword('');
+        checkBackendStatus();
+      } else {
+        setLoginError(data.message || 'Invalid credentials');
+      }
+    } catch (error) {
+      setLoginError('Connection error. Please try again.');
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem('seo-assistant-auth');
+    setMessages([]);
+    setCurrentResponse('');
+    setIsConnected(false);
+  };
 
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
@@ -180,6 +229,57 @@ function App() {
     }
   };
 
+  // Show login page if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="App">
+        <div className="login-container">
+          <div className="login-box">
+            <h1>🔍 SEO Assistant</h1>
+            <h2>🔐 Login Required</h2>
+            <p>Please enter your credentials to access the SEO Assistant</p>
+            
+            <form onSubmit={handleLogin} className="login-form">
+              <div className="form-group">
+                <label htmlFor="username">Username:</label>
+                <input
+                  type="text"
+                  id="username"
+                  value={loginUsername}
+                  onChange={(e) => setLoginUsername(e.target.value)}
+                  required
+                  placeholder="Enter username"
+                />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="password">Password:</label>
+                <input
+                  type="password"
+                  id="password"
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                  required
+                  placeholder="Enter password"
+                />
+              </div>
+              
+              {loginError && (
+                <div className="error-message">
+                  ❌ {loginError}
+                </div>
+              )}
+              
+              <button type="submit" className="login-button">
+                🚀 Login
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="App">
       <header className="app-header">
@@ -195,6 +295,9 @@ function App() {
               🗑️ Clear
             </button>
           )}
+          <button onClick={handleLogout} className="logout-button" title="Logout">
+            🚪 Logout
+          </button>
         </div>
       </header>
 
