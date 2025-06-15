@@ -28,7 +28,9 @@ git push -u origin main
 3. Add this variable:
    - **Name:** `REACT_APP_BACKEND_URL`
    - **Value:** `https://seo-mcp-lessgoooo-production.up.railway.app`
-4. Click "Deploy" to redeploy with the new variable
+4. Railway will automatically redeploy with the new variable
+
+**Note:** The build is configured with `CI=false` to handle warnings and includes proper nixpacks configuration for Railway.
 
 ## ✅ That's It!
 
