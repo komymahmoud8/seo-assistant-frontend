@@ -322,7 +322,7 @@ function App() {
                     onClick={() => setInput("Do a full technical SEO audit for utiladivecenter.com")}
                   >
                     <span className="example-icon">🔗</span>
-                    Do a full on-page SEO audit for utiladivecenter.com
+                    Do a full technical SEO audit for utiladivecenter.com
                   </button>
                   <button 
                     className="example-button" 
@@ -337,7 +337,7 @@ function App() {
                     onClick={() => setInput("Analyze this website and find the top non-branded keywords and my rankings: mamba.agency")}
                   >
                     <span className="example-icon">📈</span>
-                    Analyze this website and find the top performing pages. url: 
+                    Analyze this website and find the top non-branded keywords and my rankings: mamba.agency 
                   </button>
 
                   <button 
@@ -345,7 +345,7 @@ function App() {
                     onClick={() => setInput("Based on my website performance, find the top 3 pages to improve: gulflandproperty.com")}
                   >
                     <span className="example-icon">🎯</span>
-                    Based on my website performance, find the top 3 pages to improve. url: 
+                    Based on my website performance, find the top 3 pages to improve: gulflandproperty.com 
                   </button>
 
                   <button 
@@ -353,7 +353,7 @@ function App() {
                     onClick={() => setInput("Find my top 3 competitors, their strategy and what I should do: utiladivecenter.com")}
                   >
                     <span className="example-icon">🏆</span>
-                    Find my top 3 competitors, their strategy and what I should do. My url: 
+                    Find my top 3 competitors, their strategy and what I should do: utiladivecenter.com
                   </button>
 
                   <button 
@@ -361,7 +361,7 @@ function App() {
                     onClick={() => setInput("Do a full Content Analysis for my website: gulflandproperty.com")}
                   >
                     <span className="example-icon">📝</span>
-                    Do a full Content Analysis for my website: 
+                    Do a full Content Analysis for my website: gulflandproperty.com
                   </button>
 
                   <button 
